@@ -13,40 +13,40 @@ and the Flutter guide for
 
 # Applytics Flutter
 
-Un package Flutter puissant pour l'analyse d'événements, inspiré de PostHog. Envoyez des événements analytiques à votre propre backend avec support du batching, gestion de sessions, et plus encore.
+A powerful Flutter analytics package inspired by PostHog. Send analytics events to your own backend with support for batching, session management, and more.
 
-## 🚀 Fonctionnalités
+## 🚀 Features
 
-- ✅ Suivi d'événements simple et intuitif
-- ✅ Batching automatique des événements
-- ✅ Gestion automatique des sessions
-- ✅ Identification des utilisateurs
-- ✅ File d'attente avec envoi périodique
-- ✅ Support du mode debug
-- ✅ Gestion des erreurs réseau avec retry
-- ✅ Tests de connexion API
-- ✅ Architecture singleton pour un accès facile
+- ✅ Simple and intuitive event tracking
+- ✅ Automatic event batching
+- ✅ Automatic session management
+- ✅ User identification
+- ✅ Queue with periodic flushing
+- ✅ Debug mode support
+- ✅ Network error handling with retry
+- ✅ API connection testing
+- ✅ Singleton architecture for easy access
 
 ## 📦 Installation
 
-Ajoutez cette dépendance à votre `pubspec.yaml` :
+Add this dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
   applytics_flutter: ^0.0.1
 ```
 
-Puis exécutez :
+Then run:
 
 ```bash
 flutter pub get
 ```
 
-## 🎯 Usage de base
+## 🎯 Basic Usage
 
-### 1. Initialisation
+### 1. Initialization
 
-Initialisez Applytics au démarrage de votre application :
+Initialize Applytics at app startup:
 
 ```dart
 import 'package:applytics_flutter/applytics_flutter.dart';
@@ -58,9 +58,9 @@ void main() async {
     config: AnalyticsConfig(
       apiUrl: 'https://your-api-url.com/api',
       apiKey: 'your-api-key',
-      debug: true, // Active les logs de debug
-      batchSize: 10, // Envoie les événements par lots de 10
-      flushIntervalSeconds: 30, // Ou toutes les 30 secondes
+      debug: true, // Enable debug logs
+      batchSize: 10, // Send events in batches of 10
+      flushIntervalSeconds: 30, // Or every 30 seconds
     ),
   );
 
@@ -68,15 +68,15 @@ void main() async {
 }
 ```
 
-### 2. Suivre des événements
+### 2. Track Events
 
 ```dart
 final analytics = ApplyticsClient.instance;
 
-// Événement simple
+// Simple event
 analytics.track('button_clicked');
 
-// Événement avec propriétés
+// Event with properties
 analytics.track('product_viewed', properties: {
   'product_id': '123',
   'product_name': 'iPhone 15',
@@ -85,7 +85,7 @@ analytics.track('product_viewed', properties: {
 });
 ```
 
-### 3. Identifier un utilisateur
+### 3. Identify a User
 
 ```dart
 analytics.identify('user_123', userProperties: {
@@ -95,51 +95,51 @@ analytics.identify('user_123', userProperties: {
 });
 ```
 
-### 4. Reset (déconnexion)
+### 4. Reset (Logout)
 
 ```dart
-analytics.reset(); // Réinitialise l'utilisateur et la session
+analytics.reset(); // Reset user and session
 ```
 
-## 🔧 Configuration avancée
+## 🔧 Advanced Configuration
 
-### Options de configuration
+### Configuration Options
 
 ```dart
 AnalyticsConfig(
   apiUrl: 'https://your-api-url.com/api', // Required
   apiKey: 'your-api-key', // Required
   
-  debug: false, // Active les logs de debug
-  batchSize: 10, // Nombre d'événements avant envoi automatique
-  flushIntervalSeconds: 30, // Intervalle d'envoi en secondes
-  timeoutSeconds: 10, // Timeout des requêtes HTTP
-  enableSessionTracking: true, // Active le suivi de session
+  debug: false, // Enable debug logs
+  batchSize: 10, // Number of events before auto-send
+  flushIntervalSeconds: 30, // Send interval in seconds
+  timeoutSeconds: 10, // HTTP request timeout
+  enableSessionTracking: true, // Enable session tracking
 )
 ```
 
-### Fonctionnalités supplémentaires
+### Additional Features
 
 ```dart
-// Forcer l'envoi immédiat de tous les événements en attente
+// Force immediate flush of all pending events
 await analytics.flush();
 
-// Obtenir la taille de la file d'attente
+// Get current queue size
 int queueSize = analytics.queueSize;
 
-// Obtenir l'ID de session actuel
+// Get current session ID
 String? sessionId = analytics.sessionId;
 
-// Obtenir l'ID utilisateur actuel
+// Get current user ID
 String? userId = analytics.userId;
 
-// Tester la connexion à l'API
+// Test API connection
 bool isConnected = await analytics.testConnection();
 ```
 
-## 📡 Format des données envoyées
+## 📡 Data Format
 
-Les événements sont envoyés au format JSON suivant :
+Events are sent in the following JSON format:
 
 ```json
 {
@@ -157,38 +157,37 @@ Les événements sont envoyés au format JSON suivant :
 }
 ```
 
-### Endpoints API attendus
+### Expected API Endpoints
 
-Votre backend devrait exposer ces endpoints :
+Your backend should expose these endpoints:
 
-- `POST /events` - Recevoir les événements (avec header `Authorization: Bearer {apiKey}`)
-- `GET /health` - Vérifier la santé de l'API (optionnel)
+- `POST /events` - Receive events (with header `Authorization: Bearer {apiKey}`)
+- `GET /health` - Check API health (optional)
 
-## 🧪 Exemple complet
+## 🧪 Complete Example
 
-Consultez le dossier `example/` pour une application complète démontrant toutes les fonctionnalités.
+Check the `example/` folder for a complete application demonstrating all features.
 
-## 📝 Bonnes pratiques
+## 📝 Best Practices
 
-1. **Initialisez une seule fois** au démarrage de l'application
-2. **Utilisez des noms d'événements cohérents** (snake_case recommandé)
-3. **Ajoutez des propriétés pertinentes** pour faciliter l'analyse
-4. **Appelez `flush()`** avant de fermer l'application pour éviter de perdre des événements
-5. **Activez le mode debug** pendant le développement
+1. **Initialize once** at application startup
+2. **Use consistent event names** (snake_case recommended)
+3. **Add relevant properties** for easier analysis
+4. **Call `flush()`** before closing the app to avoid losing events
+5. **Enable debug mode** during development
 
-## 🔮 Prochaines étapes
+## 🔮 Next Steps
 
-Pour créer la plateforme web d'analyse :
-- Backend API pour recevoir et stocker les événements
-- Base de données pour le stockage (PostgreSQL, MongoDB, etc.)
-- Dashboard web avec graphiques et statistiques
-- Filtres et segmentation des données
+To create the web analytics platform:
+- Backend API to receive and store events
+- Database for storage (PostgreSQL, MongoDB, etc.)
+- Web dashboard with charts and statistics
+- Data filtering and segmentation
 
 ## 📄 License
 
 MIT License
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
-# applytics_flutter
+Contributions are welcome! Feel free to open an issue or pull request.
