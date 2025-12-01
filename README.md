@@ -152,7 +152,7 @@ Events are sent in the following JSON format:
       "properties": {
         "button_name": "submit"
       },
-      "timestamp": "2025-12-01T10:30:00.000Z",
+      "created_at": "2025-12-01T10:30:00.000Z",
       "user_id": "user_123",
       "session_id": "1701425400000-1701425400000000"
     }
@@ -164,7 +164,7 @@ Events are sent in the following JSON format:
 
 Your backend should expose these endpoints:
 
-- `POST /events` - Receive events (with header `Authorization: Bearer {apiKey}`)
+- `POST /events`)
 - `GET /health` - Check API health (optional)
 
 ## 🧪 Complete Example
