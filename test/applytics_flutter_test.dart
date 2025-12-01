@@ -10,24 +10,24 @@ void main() {
       expect(event.properties, isNull);
       expect(event.userId, isNull);
       expect(event.sessionId, isNull);
-      expect(event.timestamp, isA<DateTime>());
+      expect(event.createdAt, isA<DateTime>());
     });
 
     test('should create event with all fields', () {
-      final timestamp = DateTime.now();
+      final createdAt = DateTime.now();
       final event = AnalyticsEvent(
         name: 'test_event',
         properties: {'key': 'value'},
         userId: 'user_123',
         sessionId: 'session_456',
-        timestamp: timestamp,
+        createdAt: createdAt,
       );
 
       expect(event.name, 'test_event');
       expect(event.properties, {'key': 'value'});
       expect(event.userId, 'user_123');
       expect(event.sessionId, 'session_456');
-      expect(event.timestamp, timestamp);
+      expect(event.createdAt, createdAt);
     });
 
     test('should convert to JSON correctly', () {
@@ -42,7 +42,7 @@ void main() {
       expect(json['name'], 'test_event');
       expect(json['properties'], {'count': 42});
       expect(json['user_id'], 'user_123');
-      expect(json['timestamp'], isA<String>());
+      expect(json['created_at'], isA<String>());
     });
 
     test('should create from JSON correctly', () {

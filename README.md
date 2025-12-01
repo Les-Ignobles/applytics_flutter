@@ -13,7 +13,7 @@ and the Flutter guide for
 
 # Applytics Flutter
 
-A powerful Flutter analytics package inspired by PostHog. Send analytics events to your own backend with support for batching, session management, and more.
+A powerful Flutter analytics package inspired by PostHog. Send analytics events to your own backend with support for batching, session management, and automatic device information collection.
 
 ## 🚀 Features
 
@@ -26,6 +26,7 @@ A powerful Flutter analytics package inspired by PostHog. Send analytics events 
 - ✅ Network error handling with retry
 - ✅ API connection testing
 - ✅ Singleton architecture for easy access
+- ✅ **Automatic device and app info collection** (included)
 
 ## 📦 Installation
 
@@ -42,6 +43,8 @@ Then run:
 flutter pub get
 ```
 
+That's it! Device info packages are already included.
+
 ## 🎯 Basic Usage
 
 ### 1. Initialization
@@ -56,8 +59,8 @@ void main() async {
 
   ApplyticsClient.initialize(
     config: AnalyticsConfig(
-      apiUrl: 'https://your-api-url.com/api',
-      apiKey: 'your-api-key',
+      apiUrl: 'https://your-supabase-url.supabase.co/functions/v1/track-event',
+      apiKey: 'your-project-api-key', // From your projects table
       debug: true, // Enable debug logs
       batchSize: 10, // Send events in batches of 10
       flushIntervalSeconds: 30, // Or every 30 seconds

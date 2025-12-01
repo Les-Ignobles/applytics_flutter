@@ -4,6 +4,7 @@ import 'models/analytics_config.dart';
 import 'services/api_service.dart';
 import 'services/event_queue.dart';
 import 'services/session_manager.dart';
+import 'services/device_info_service.dart';
 
 /// Main Applytics client for tracking analytics events
 class ApplyticsClient {
@@ -13,9 +14,11 @@ class ApplyticsClient {
   late final ApiService _apiService;
   late final EventQueue _eventQueue;
   late final SessionManager? _sessionManager;
+  late final DeviceInfoService _deviceInfoService;
 
   String? _userId;
   bool _isInitialized = false;
+  Map<String, dynamic>? _deviceInfo;
 
   ApplyticsClient._internal({
     required this.config,
@@ -32,10 +35,29 @@ class ApplyticsClient {
       );
     }
 
+    _deviceInfoService = DeviceInfoService.instance;
+
+    // Collect device info asynchronously
+    _collectDeviceInfo();
+
     _isInitialized = true;
 
     if (config.debug) {
       print('Applytics: Client initialized with API URL: ${config.apiUrl}');
+    }
+  }
+
+  /// Collect device information
+  Future<void> _collectDeviceInfo() async {
+    try {
+      _deviceInfo = await _deviceInfoService.getDeviceInfo();
+      if (config.debug) {
+        print('Applytics: Device info collected: $_deviceInfo');
+      }
+    } catch (e) {
+      if (config.debug) {
+        print('Applytics: Failed to collect device info: $e');
+      }
     }
   }
 
@@ -74,6 +96,7 @@ class ApplyticsClient {
       properties: properties,
       userId: _userId,
       sessionId: _sessionManager?.sessionId,
+      deviceInfo: _deviceInfo,
     );
 
     _eventQueue.enqueue(event);
@@ -140,4 +163,3 @@ class ApplyticsClient {
     }
   }
 }
-
