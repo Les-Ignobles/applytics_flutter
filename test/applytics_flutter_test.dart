@@ -66,11 +66,9 @@ void main() {
   group('AnalyticsConfig', () {
     test('should create config with required fields', () {
       final config = AnalyticsConfig(
-        apiUrl: 'https://api.example.com',
         apiKey: 'test_key',
       );
 
-      expect(config.apiUrl, 'https://api.example.com');
       expect(config.apiKey, 'test_key');
       expect(config.debug, false);
       expect(config.batchSize, 10);
@@ -81,7 +79,6 @@ void main() {
 
     test('should create config with custom values', () {
       final config = AnalyticsConfig(
-        apiUrl: 'https://api.example.com',
         apiKey: 'test_key',
         debug: true,
         batchSize: 5,
@@ -99,7 +96,6 @@ void main() {
 
     test('should copy config with changes', () {
       final config = AnalyticsConfig(
-        apiUrl: 'https://api.example.com',
         apiKey: 'test_key',
       );
 
@@ -108,7 +104,6 @@ void main() {
         batchSize: 20,
       );
 
-      expect(newConfig.apiUrl, 'https://api.example.com');
       expect(newConfig.apiKey, 'test_key');
       expect(newConfig.debug, true);
       expect(newConfig.batchSize, 20);
@@ -134,7 +129,6 @@ void main() {
     test('should initialize successfully', () {
       final client = ApplyticsClient.initialize(
         config: AnalyticsConfig(
-          apiUrl: 'https://api.example.com',
           apiKey: 'test_key',
         ),
       );
@@ -146,7 +140,6 @@ void main() {
     test('should track user identity', () {
       ApplyticsClient.initialize(
         config: AnalyticsConfig(
-          apiUrl: 'https://api.example.com',
           apiKey: 'test_key',
         ),
       );
@@ -163,7 +156,6 @@ void main() {
     test('should reset user identity', () {
       ApplyticsClient.initialize(
         config: AnalyticsConfig(
-          apiUrl: 'https://api.example.com',
           apiKey: 'test_key',
         ),
       );

@@ -7,7 +7,6 @@ void main() async {
   // Initialize Applytics
   ApplyticsClient.initialize(
     config: AnalyticsConfig(
-      apiUrl: 'https://your-api-url.com/api',
       apiKey: 'your-api-key',
       debug: true, // Enable debug logs
       batchSize: 10, // Send events in batches of 10

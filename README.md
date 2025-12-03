@@ -59,7 +59,6 @@ void main() async {
 
   ApplyticsClient.initialize(
     config: AnalyticsConfig(
-      apiUrl: 'https://your-supabase-url.supabase.co/functions/v1/track-event',
       apiKey: 'your-project-api-key', // From your projects table
       debug: true, // Enable debug logs
       batchSize: 10, // Send events in batches of 10
@@ -110,7 +109,6 @@ analytics.reset(); // Reset user and session
 
 ```dart
 AnalyticsConfig(
-  apiUrl: 'https://your-api-url.com/api', // Required
   apiKey: 'your-api-key', // Required
   
   debug: false, // Enable debug logs

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:applytics_flutter/src/constants/shared_constants.dart';
 import 'package:http/http.dart' as http;
 import '../models/analytics_event.dart';
 import '../models/analytics_config.dart';
@@ -16,7 +17,7 @@ class ApiService {
   /// Send a single event to the API
   Future<bool> sendEvent(AnalyticsEvent event) async {
     try {
-      final url = Uri.parse(config.apiUrl);
+      final url = Uri.parse(SharedConstants.apiUrl);
       final response = await _client
           .post(
             url,
@@ -61,7 +62,7 @@ class ApiService {
   /// Test the API connection
   Future<bool> testConnection() async {
     try {
-      final url = Uri.parse('${config.apiUrl}/health');
+      final url = Uri.parse('${SharedConstants.apiUrl}/health');
       final response = await _client
           .get(
             url,

@@ -43,7 +43,7 @@ class ApplyticsClient {
     _isInitialized = true;
 
     if (config.debug) {
-      print('Applytics: Client initialized with API URL: ${config.apiUrl}');
+      print('Applytics: Client initialized with API');
     }
   }
 
