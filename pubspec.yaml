@@ -1,6 +1,6 @@
 name: applytics_flutter
 description: "A powerful analytics package for Flutter apps inspired by PostHog. Track events, identify users, and send data to your own backend with automatic batching and session management."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/yourusername/applytics_flutter
 
 environment:
