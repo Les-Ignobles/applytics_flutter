@@ -1,3 +1,14 @@
+## 0.0.3
+
+* 🛠️ Update API URL (Breaking change)
+
+## 0.0.2
+
+* 🛠️ Bug fixes and performance improvements
+* 🔄 Improved event batching and retry logic
+* 🧪 Added more comprehensive tests
+* 📚 Updated documentation with more examples
+
 ## 0.0.1
 
 * 🎉 Initial release
